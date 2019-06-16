@@ -16,7 +16,7 @@ public class Funcionario {
     Departamento departamento;
     Pessoa pessoa;
 
-    public Funcionario(int id, String nome , long cpf , String data , String sexo) {
+    public Funcionario(int id, String nome , String cpf , String data , String sexo) {
         this.pessoa = new Pessoa();
         this.id = id;
         this.pessoa.nome = nome;

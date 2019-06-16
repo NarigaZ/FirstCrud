@@ -16,7 +16,7 @@ public class Pessoa {
     String nome;
     String sexo;
     String datanasc;
-    long cpf;
+    String cpf;
 
     public String getNome() {
         return nome;
@@ -42,11 +42,11 @@ public class Pessoa {
         this.datanasc = datanasc;
     }
 
-    public long getCpf() {
+    public String getCpf() {
         return cpf;
     }
 
-    public void setCpf(long cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 }

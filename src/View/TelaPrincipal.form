@@ -432,7 +432,7 @@
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="jLabel3" min="-2" pref="102" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="c_func_datanasc" min="-2" pref="147" max="-2" attributes="0"/>
+                                          <Component id="c_func_datanasc" min="-2" pref="72" max="-2" attributes="0"/>
                                           <EmptySpace max="32767" attributes="0"/>
                                           <Component id="jLabel4" min="-2" pref="33" max="-2" attributes="0"/>
                                       </Group>
@@ -446,14 +446,14 @@
                                               <Group type="102" alignment="0" attributes="0">
                                                   <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                                                   <EmptySpace max="-2" attributes="0"/>
-                                                  <Component id="c_func_cpf" min="-2" pref="131" max="-2" attributes="0"/>
-                                                  <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                                                  <Component id="c_func_cpf" min="-2" pref="151" max="-2" attributes="0"/>
+                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
                                                   <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                                   <Component id="c_func_dep" min="-2" pref="109" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
-                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                          <EmptySpace min="0" pref="23" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
@@ -491,9 +491,9 @@
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="3" attributes="0">
                                               <Component id="jLabel5" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                                              <Component id="c_func_cpf" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                                               <Component id="jLabel7" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                                               <Component id="c_func_dep" alignment="3" min="-2" max="-2" attributes="0"/>
+                                              <Component id="c_func_cpf" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
@@ -526,11 +526,6 @@
                             <Property name="text" type="java.lang.String" value="Data de Nascimento:"/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JTextField" name="c_func_datanasc">
-                          <Events>
-                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="c_func_datanascActionPerformed"/>
-                          </Events>
-                        </Component>
                         <Component class="javax.swing.JLabel" name="jLabel4">
                           <Properties>
                             <Property name="horizontalAlignment" type="int" value="0"/>
@@ -555,8 +550,6 @@
                             <Property name="text" type="java.lang.String" value="CPF:"/>
                           </Properties>
                         </Component>
-                        <Component class="javax.swing.JTextField" name="c_func_cpf">
-                        </Component>
                         <Component class="javax.swing.JLabel" name="jLabel7">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="Departamento:"/>
@@ -571,6 +564,20 @@
                                 <StringItem index="2" value="Item 3"/>
                                 <StringItem index="3" value="Item 4"/>
                               </StringArray>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JFormattedTextField" name="c_func_cpf">
+                          <Properties>
+                            <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
+                              <Format format="###.###.###-##" subtype="-1" type="5"/>
+                            </Property>
+                          </Properties>
+                        </Component>
+                        <Component class="javax.swing.JFormattedTextField" name="c_func_datanasc">
+                          <Properties>
+                            <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
+                              <Format format="##/##/####" subtype="-1" type="5"/>
                             </Property>
                           </Properties>
                         </Component>

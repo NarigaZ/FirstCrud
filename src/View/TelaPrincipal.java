@@ -246,14 +246,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         c_func_nome = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        c_func_datanasc = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         c_func_masc = new javax.swing.JRadioButton();
         c_func_femin = new javax.swing.JRadioButton();
         jLabel5 = new javax.swing.JLabel();
-        c_func_cpf = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         c_func_dep = new javax.swing.JComboBox();
+        c_func_cpf = new javax.swing.JFormattedTextField();
+        c_func_datanasc = new javax.swing.JFormattedTextField();
         btn_func_salvar = new javax.swing.JButton();
         btn_func_cancelar = new javax.swing.JButton();
         btn_func_novo = new javax.swing.JButton();
@@ -475,12 +475,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Data de Nascimento:");
 
-        c_func_datanasc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                c_func_datanascActionPerformed(evt);
-            }
-        });
-
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Sexo:");
 
@@ -499,6 +493,18 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         c_func_dep.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        try {
+            c_func_cpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            c_func_datanasc.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -509,7 +515,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(c_func_datanasc, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(c_func_datanasc, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
@@ -521,12 +527,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(c_func_cpf, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(38, 38, 38)
+                                .addComponent(c_func_cpf, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
                                 .addComponent(jLabel7)
                                 .addGap(18, 18, 18)
                                 .addComponent(c_func_dep, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 23, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(c_func_femin, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -554,9 +560,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(c_func_cpf, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(c_func_dep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(c_func_dep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(c_func_cpf, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(15, 15, 15)
                         .addComponent(c_func_masc, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -705,10 +711,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_c_func_nomeActionPerformed
 
-    private void c_func_datanascActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_c_func_datanascActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_c_func_datanascActionPerformed
-
     private void c_func_mascActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_c_func_mascActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_c_func_mascActionPerformed
@@ -726,17 +728,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_func_novoActionPerformed
 
     private void btn_func_salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_func_salvarActionPerformed
-            long cpf = Long.parseLong(c_func_cpf.getText());
             int indexcb = c_func_dep.getSelectedIndex();
             if (modoFunc.equals("Novo")) {
-            Funcionario d = new Funcionario(ListaDep.size()+1000 , c_func_nome.getText() , cpf , c_func_datanasc.getText() , "Masculino" );
+            Funcionario d = new Funcionario(ListaDep.size()+1000 , c_func_nome.getText() , c_func_cpf.getText() , c_func_datanasc.getText() , "Masculino" );
             d.setDepartamento(ListaDep.get(indexcb));
             ListaFunc.add(d);
             }else if (modoFunc.equals("Editar")) {
                 int index = tbl_func.getSelectedRow();
                 ListaFunc.get(index).getPessoa().setNome(c_func_nome.getText());
                 ListaFunc.get(index).getPessoa().setDatanasc(c_func_datanasc.getText());
-                ListaFunc.get(index).getPessoa().setCpf(cpf);
+                ListaFunc.get(index).getPessoa().setCpf(c_func_cpf.getText());
                 ListaFunc.get(index).setDepartamento(ListaDep.get(indexcb));
             }
             LoadTableFunc();
@@ -893,8 +894,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btn_func_salvar;
     private javax.swing.JTextField c_dep_dep;
     private javax.swing.JTextField c_dep_id;
-    private javax.swing.JTextField c_func_cpf;
-    private javax.swing.JTextField c_func_datanasc;
+    private javax.swing.JFormattedTextField c_func_cpf;
+    private javax.swing.JFormattedTextField c_func_datanasc;
     private javax.swing.JComboBox c_func_dep;
     private javax.swing.JRadioButton c_func_femin;
     private javax.swing.JRadioButton c_func_masc;
