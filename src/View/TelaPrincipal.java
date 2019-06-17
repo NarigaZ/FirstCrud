@@ -5,8 +5,8 @@
  */
 package View;
 
-import Model.Departamento;
-import Model.Funcionario;
+import Model.bean.Departamento;
+import Model.bean.Funcionario;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
