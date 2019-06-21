@@ -7,6 +7,7 @@ package View;
 
 import Model.bean.Departamento;
 import Model.bean.Funcionario;
+import Model.dao.FuncionarioDao;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
@@ -731,7 +732,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
             int indexcb = c_func_dep.getSelectedIndex();
             if (modoFunc.equals("Novo")) {
             Funcionario d = new Funcionario(ListaDep.size()+1000 , c_func_nome.getText() , c_func_cpf.getText() , c_func_datanasc.getText() , "Masculino" );
+            FuncionarioDao dao = new FuncionarioDao();
             d.setDepartamento(ListaDep.get(indexcb));
+            dao.Create(d);
             ListaFunc.add(d);
             }else if (modoFunc.equals("Editar")) {
                 int index = tbl_func.getSelectedRow();
@@ -808,7 +811,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             int id = Integer.parseInt(c_dep_id.getText());
             if (modoDep.equals("Novo")) {
                 Departamento d = new Departamento(id,c_dep_dep.getText());
-            ListaDep.add(d);
+                ListaDep.add(d);
             }else if (modoDep.equals("Editar")) {
                 int index = tbl_dep.getSelectedRow();
                 ListaDep.get(index).setId(id);
