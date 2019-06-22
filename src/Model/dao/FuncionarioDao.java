@@ -10,7 +10,11 @@ import Connection.ConnectionFactory;
 import Model.bean.Funcionario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -25,9 +29,10 @@ public class FuncionarioDao {
         Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
         try {
-            stmt = con.prepareStatement("INSERT INTO funcionarios (nome,cpf)VALUES(?,?)");
+            stmt = con.prepareStatement("INSERT INTO funcionarios (nome,datanasc,cpf)VALUES(?,?,?)");
             stmt.setString(1, f.getPessoa().getNome());
-            stmt.setString(2, f.getPessoa().getCpf());
+            stmt.setDate(2, new java.sql.Date(f.getPessoa().getDatanasc().getTime()));
+            stmt.setString(3, f.getPessoa().getCpf());
             stmt.executeUpdate();
             JOptionPane.showMessageDialog(null, "Salvo com Sucesso!");
         } catch (SQLException ex) {
@@ -36,7 +41,26 @@ public class FuncionarioDao {
         }finally{
             ConnectionFactory.closeConnection(con,stmt);
         }
-        
+    }
+    
+    public List<Funcionario> read(){
+        Connection con = ConnectionFactory.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        List<Funcionario> funcionarios = new ArrayList<>();
+        try {
+            stmt = con.prepareStatement("SELECT * FROM funcionarios");
+            rs = stmt.executeQuery();
+            while(rs.next()){
+                Funcionario func = new Funcionario(rs.getInt("id") , rs.getString("nome") , rs.getString("cpf") ,  (rs.getDate("datanasc")) , rs.getString("sexo") );
+                funcionarios.add(func);
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro na Leitura de dados"+ex);
+        }finally{
+            ConnectionFactory.closeConnection(con, stmt, rs);
+        }
+        return funcionarios;
     }
 
 }

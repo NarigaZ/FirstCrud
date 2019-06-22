@@ -8,8 +8,15 @@ package View;
 import Model.bean.Departamento;
 import Model.bean.Funcionario;
 import Model.dao.FuncionarioDao;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -20,6 +27,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     ArrayList<Departamento> ListaDep;
     String modoDep = "Navegar";
     String modoFunc = "Navegar";
+    final static SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
     
     public void LoadTableFunc (){
         Object ColunasFunc[] = {"ID", "Nome", "CPF", "Data Nascimento"};
@@ -28,7 +36,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             Object linha [] = new Object [] { ListaFunc.get(i).getId(),
                                               ListaFunc.get(i).getPessoa().getNome(),
                                               ListaFunc.get(i).getPessoa().getCpf(),
-                                              ListaFunc.get(i).getPessoa().getDatanasc()};
+                                              formato.format(ListaFunc.get(i).getPessoa().getDatanasc())};
             modeloFunc.addRow(linha);
            
         }
@@ -38,6 +46,21 @@ public class TelaPrincipal extends javax.swing.JFrame {
         tbl_func.getColumnModel().getColumn(2).setPreferredWidth(70);
         tbl_func.getColumnModel().getColumn(3).setPreferredWidth(50);
  
+    }
+    
+    public void readJTable(){
+        DefaultTableModel modeloFunc = (DefaultTableModel) tbl_func.getModel();
+        tbl_func.setRowSorter(new TableRowSorter(modeloFunc));
+        FuncionarioDao fdao = new FuncionarioDao();
+        modeloFunc.setNumRows(0);
+        for(Funcionario f: fdao.read()){
+            modeloFunc.addRow(new Object[]{
+                f.getId(),
+                f.getPessoa().getNome(),
+                f.getPessoa().getCpf(),
+                f.getPessoa().getDatanasc()
+            });
+        }
     }
     
     public void LoadTableDep (){
@@ -64,6 +87,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
             c_func_dep.addItem(ListaDep.get(i).getNome());
         }
     }
+    
+ 
     
     public void ManipulaInterfaceFunc () {
         switch(modoFunc){
@@ -211,7 +236,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         ManipulaInterfaceFunc(); 
         ManipulaInterfaceDep(); 
         LoadTableDep();
-        LoadTableFunc();
+        readJTable();
        
     }
 
@@ -432,16 +457,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 "ID", "Nome", "CPF", "Data Nascimento"
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class
-            };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false
             };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -457,9 +475,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             tbl_func.getColumnModel().getColumn(0).setPreferredWidth(30);
             tbl_func.getColumnModel().getColumn(1).setPreferredWidth(200);
             tbl_func.getColumnModel().getColumn(2).setPreferredWidth(70);
-            tbl_func.getColumnModel().getColumn(2).setHeaderValue("CPF");
             tbl_func.getColumnModel().getColumn(3).setPreferredWidth(50);
-            tbl_func.getColumnModel().getColumn(3).setHeaderValue("Data Nascimento");
         }
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Funcionário"));
@@ -505,6 +521,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        c_func_datanasc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                c_func_datanascActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -730,8 +751,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void btn_func_salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_func_salvarActionPerformed
             int indexcb = c_func_dep.getSelectedIndex();
+            Date data;
+        try {
+            data = formato.parse(c_func_datanasc.getText());
+        } catch (ParseException ex) {
+            JOptionPane.showMessageDialog(null, "Data no Formato Incorreto");
+            data = null;
+        }
             if (modoFunc.equals("Novo")) {
-            Funcionario d = new Funcionario(ListaDep.size()+1000 , c_func_nome.getText() , c_func_cpf.getText() , c_func_datanasc.getText() , "Masculino" );
+            Funcionario d = new Funcionario(ListaDep.size()+1000 , c_func_nome.getText() , c_func_cpf.getText() , data , "Masculino" );
             FuncionarioDao dao = new FuncionarioDao();
             d.setDepartamento(ListaDep.get(indexcb));
             dao.Create(d);
@@ -739,11 +767,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }else if (modoFunc.equals("Editar")) {
                 int index = tbl_func.getSelectedRow();
                 ListaFunc.get(index).getPessoa().setNome(c_func_nome.getText());
-                ListaFunc.get(index).getPessoa().setDatanasc(c_func_datanasc.getText());
+                ListaFunc.get(index).getPessoa().setDatanasc(data);
                 ListaFunc.get(index).getPessoa().setCpf(c_func_cpf.getText());
                 ListaFunc.get(index).setDepartamento(ListaDep.get(indexcb));
             }
-            LoadTableFunc();
+            readJTable();
             modoFunc = "Navegar";
             ManipulaInterfaceFunc(); 
     }//GEN-LAST:event_btn_func_salvarActionPerformed
@@ -775,7 +803,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             int indexcb = ListaDep.indexOf(t);
             c_func_nome.setText(d.getPessoa().getNome());
             c_func_cpf.setText(String.valueOf(d.getPessoa().getCpf()));
-            c_func_datanasc.setText(d.getPessoa().getDatanasc());
+            c_func_datanasc.setText(formato.format(d.getPessoa().getDatanasc()));
             c_func_dep.setSelectedIndex(indexcb);
             modoFunc = "Selecao";
             ManipulaInterfaceFunc();         
@@ -847,6 +875,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
         modoDep = "Editar";
         ManipulaInterfaceDep(); 
     }//GEN-LAST:event_btn_dep_editarActionPerformed
+
+    private void c_func_datanascActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_c_func_datanascActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_c_func_datanascActionPerformed
 
     /**
      * @param args the command line arguments

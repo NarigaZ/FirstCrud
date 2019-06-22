@@ -15,7 +15,7 @@ public class Pessoa {
     
     String nome;
     String sexo;
-    String datanasc;
+    Date datanasc;
     String cpf;
 
     public String getNome() {
@@ -34,11 +34,11 @@ public class Pessoa {
         this.sexo = sexo;
     }
 
-    public String getDatanasc() {
+    public Date getDatanasc() {
         return datanasc;
     }
 
-    public void setDatanasc(String datanasc) {
+    public void setDatanasc(Date datanasc) {
         this.datanasc = datanasc;
     }
 
