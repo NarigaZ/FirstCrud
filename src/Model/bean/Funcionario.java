@@ -5,6 +5,7 @@
  */
 package Model.bean;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -17,9 +18,17 @@ public class Funcionario {
     Pessoa pessoa;
     
 
-    public Funcionario(int id, String nome , String cpf , Date data , String sexo) {
+    public Funcionario(String nome , String cpf , Date data , String sexo) {
         this.pessoa = new Pessoa();
-        this.id = id;
+        this.pessoa.nome = nome;
+        this.pessoa.cpf = cpf;
+        this.pessoa.sexo = sexo;
+        this.pessoa.datanasc = data;
+    }
+    
+    public Funcionario(int id , String nome , String sexo , Date data , String cpf , int dep_id) {
+        this.pessoa = new Pessoa();
+        this.departamento = new Departamento(dep_id);
         this.pessoa.nome = nome;
         this.pessoa.cpf = cpf;
         this.pessoa.sexo = sexo;

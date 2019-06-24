@@ -20,6 +20,10 @@ public class Departamento {
         this.id = id;
         this.nome = nome;
     }
+    
+    public Departamento(int id) {
+        this.id = id;
+    }
    
 
     public int getId() {

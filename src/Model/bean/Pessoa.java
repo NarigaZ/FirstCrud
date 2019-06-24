@@ -5,6 +5,7 @@
  */
 package Model.bean;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 /**

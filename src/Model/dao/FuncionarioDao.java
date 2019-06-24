@@ -14,6 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -52,7 +53,7 @@ public class FuncionarioDao {
             stmt = con.prepareStatement("SELECT * FROM funcionarios");
             rs = stmt.executeQuery();
             while(rs.next()){
-                Funcionario func = new Funcionario(rs.getInt("id") , rs.getString("nome") , rs.getString("cpf") ,  (rs.getDate("datanasc")) , rs.getString("sexo") );
+                Funcionario func = new Funcionario(rs.getInt("id") , rs.getString("nome") , rs.getString("sexo") , rs.getDate("datanasc") ,rs.getString("cpf") , rs.getInt("Id_dep") );
                 funcionarios.add(func);
             }
         } catch (SQLException ex) {
