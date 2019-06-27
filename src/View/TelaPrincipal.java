@@ -63,12 +63,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
         tbl_func.getColumnModel().getColumn(3).setPreferredWidth(50);
         modeloFunc.setNumRows(0);
         for(Funcionario f: fdao.read()){
-            modeloFunc.addRow(new Object[]{
-                f.getId(),
-                f.getPessoa().getNome(),
-                f.getPessoa().getCpf(),
-                f.getPessoa().getDatanasc()
-            });
+            if(f!=null){
+                    modeloFunc.addRow(new Object[]{
+                    f.getId(),
+                    f.getPessoa().getNome(),
+                    f.getPessoa().getCpf(),
+                    formato.format(f.getPessoa().getDatanasc())
+                    }
+                    );
+            }
+            
         }
     }
     
@@ -81,10 +85,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
         DepartamentoDao ddao = new DepartamentoDao();
         modelo.setNumRows(0);
         for(Departamento d: ddao.read()){
-            modelo.addRow(new Object[]{
+            if(d!=null){
+                modelo.addRow(new Object[]{
                 d.getId(),
                 d.getNome()
-            });
+                });
+            }
         LoadCBFunc();
  }
     }
